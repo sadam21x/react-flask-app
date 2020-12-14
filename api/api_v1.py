@@ -2,10 +2,13 @@ from sqlite3.dbapi2 import connect
 from flask import Flask, jsonify, make_response, request, abort, url_for
 from pymongo import MongoClient
 import json
+import urllib
 import sqlite3
 
 # connection to MongoDB Database
-connection = MongoClient("mongodb://localhost:27017/")
+# connection_url = 'mongodb://localhost:27017'
+connection_url = 'mongodb://admin:bulldog99@cloud-computing-shard-00-00.i77a5.mongodb.net:27017,cloud-computing-shard-00-01.i77a5.mongodb.net:27017,cloud-computing-shard-00-02.i77a5.mongodb.net:27017/test?ssl=true&replicaSet=atlas-11dc32-shard-0&authSource=admin&retryWrites=true&w=majority'
+connection = MongoClient(connection_url)
 
 def home_index():
     api_list=[]

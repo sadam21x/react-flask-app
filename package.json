@@ -6,13 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "webpack-dev-server --mode development --open --hot"
+    "watch": "npm-watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "sadam21x",
   "license": "ISC",
   "dependencies": {
+    "materialize-css": "^1.0.0",
     "react": "^17.0.1",
+    "react-cookie": "^4.0.3",
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
@@ -27,9 +29,17 @@
     "eslint-plugin-react": "^7.21.5",
     "html-loader": "^1.3.2",
     "html-webpack-plugin": "^4.5.0",
+    "npm-watch": "^0.7.0",
     "style-loader": "^2.0.0",
-    "webpack": "^5.10.0",
-    "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack": "^5.10.1",
+    "webpack-cli": "^4.2.0"
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "js,jsx,css"
+    }
   }
 }

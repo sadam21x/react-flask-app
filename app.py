@@ -6,11 +6,14 @@ import flask
 import json
 import sqlite3
 import random
+import urllib
 from api.api_v1 import home_index, list_users, list_user, add_user, del_user, upd_user
 from api.api_v2 import list_tweets, list_tweet, add_tweet
 
 # connection to MongoDB Database
-connection = MongoClient("mongodb://localhost:27017/")
+# connection_url = 'mongodb://localhost:27017'
+connection_url = 'mongodb://admin:bulldog99@cloud-computing-shard-00-00.i77a5.mongodb.net:27017,cloud-computing-shard-00-01.i77a5.mongodb.net:27017,cloud-computing-shard-00-02.i77a5.mongodb.net:27017/test?ssl=true&replicaSet=atlas-11dc32-shard-0&authSource=admin&retryWrites=true&w=majority'
+connection = MongoClient(connection_url)
 
 app = Flask(__name__, template_folder='public', static_folder='public/static')
 # cookie = flask.request.cookies.get('my_cookie')
