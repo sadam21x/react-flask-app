@@ -4,13 +4,9 @@
 ## NIM : 151811513004 <br><br>
 
 ## Requirements :
-### ✔️ nodejs & npm
+### ✔️ NodeJS & NPM
 ### ✔️ Python 3
-### ✔️ virtualenv
-### ✔️ flask
-### ✔️ flask-cors
-### ✔️ nose
-### ✔️ pymongo
+### ✔️ Virtualenv
 
 ## <br>
 
@@ -35,6 +31,8 @@ virtualenv env
 ```
 
 ```shell
+# Enter virtualenv
+
 # Linux
 source env/bin/activate
 
@@ -45,7 +43,7 @@ source env/Scripts/activate
 ```shell
 # Install python dependencies
 
-pip install flask flask-cors nose pymongo
+pip install -r requirements.txt
 ```
 
 ```shell
