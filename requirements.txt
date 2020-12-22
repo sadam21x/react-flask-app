@@ -3,3 +3,5 @@ flask-cors
 nose
 pymongo
 dnspython
+bcrypt
+requests

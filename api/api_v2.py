@@ -1,8 +1,6 @@
 from flask import Flask, jsonify, make_response, request, abort, url_for
 from pymongo import MongoClient
 import json
-import urllib
-import sqlite3
 
 # connection to MongoDB Database
 # connection_url = 'mongodb://localhost:27017'

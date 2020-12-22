@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
+import TweetTemplate from './TweetTemplate'
 
 export class TweetList extends Component {
     render() {
-        const { tweetedBy } = this.props;
-        const { body } = this.props;
+        let tweetlist = this.props.tweets.map(tweet => <TweetTemplate key={tweet.id} {...tweet} />);           
         
         return (
             <div>
                 <ul className="collection">
-                    <li className="collection-item avatar">
-                        <i className="material-icons circle red">play_arrow</i>
-                        <p>{ tweetedBy }</p>
-                        <p>{ body }</p>
-                    </li>
+                    {tweetlist}
                 </ul>
             </div>
         )
