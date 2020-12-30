@@ -70,25 +70,26 @@ def root():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
-        return render_template('index.html', session = session['logged_in'])
+        return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
 def do_admin_login():
-    users = connection.cloud_native.users
-    api_list=[]
-    login_user = users.find({'username': request.form['username']})
-    for i in login_user:
-        api_list.append(i)
-    print (api_list)
-    if api_list != []:
-        if api_list[0]['password'].decode('utf-8') == bcrypt.hashpw(request.form['password'].encode('utf-8'), api_list[0]['password']).decode('utf-8'):
-            session['logged_in'] = api_list[0]['username']
-            return redirect(url_for('index'))
-        return 'Invalid username/password!'
-    else:
-        flash("Invalid Authentication")
-
-    return 'Invalid User!'
+	users = connection.cloud_native.users
+	api_list=[]
+	login_user = users.find({'username': request.form['username']})
+	for i in login_user:
+		api_list.append(i)
+	print (api_list)
+	if api_list != []:
+		# if api_list[0]['password'].decode('utf-8') == bcrypt.hashpw(request.form['password'].encode('utf-8'), api_list[0]['password']).decode('utf-8'):
+		if api_list[0]['password'] == request.form['password']:
+			session['username'] = api_list[0]['username']
+			session['logged_in'] = True
+			return redirect(url_for('root'))
+		return 'Invalid username/password!'
+	else:
+		flash("Invalid Authentication")
+		return 'Invalid User!'
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -106,7 +107,8 @@ def signup():
             "email": request.form['email'],
             "id": random.randint(1,1000),
             "name": request.form['name'],
-            "password": bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt()),
+            # "password": bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt()),
+            "password": request.form['pass'],
             "username": request.form['username']
             })
             session['username'] = request.form['username']
@@ -121,12 +123,16 @@ def logout():
     session['logged_in'] = False
     return redirect(url_for('root'))
 
+@app.route("/getcredentials", methods=['GET'])
+def getcredentials():
+    return jsonify({'username': session['username']}), 200
+
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     if request.method=='POST':
         users = connection.cloud_native.users
         api_list=[]
-        existing_users = users.find({"username":session['logged_in']})
+        existing_users = users.find({"username":session['username']})
         for i in existing_users:
             api_list.append(str(i))
         user = {}
@@ -135,14 +141,14 @@ def profile():
             user['email']=request.form['email']
             user['name']= request.form['name']
             user['password']=request.form['pass']
-            users.update({'username':session['logged_in']},{'$set': user} )
+            users.update({'username':session['username']},{'$set': user} )
         else:
             return 'User not found!'
         return redirect(url_for('index'))
     if request.method=='GET':
         users = connection.cloud_native.users
         user=[]
-        existing_user = users.find({"username":session['logged_in']})
+        existing_user = users.find({"username":session['username']})
         for i in existing_user:
             user.append(i)
         return render_template('profile.html', name=user[0]['name'], username=user[0]['username'], password=user[0]['password'], email=user[0]['email'])
@@ -237,10 +243,10 @@ def get_tweet(id):
 @app.route('/api/v2/tweets', methods=['POST'])
 def add_tweets():
     user_tweet = {}
-    if not request.json or not 'username' in request.json or not 'body' in request.json:
+    if not request.json or not 'body' in request.json:
         abort(400)
     
-    user_tweet['tweetedby'] = request.json['username']
+    user_tweet['tweetedby'] = session['username']
     user_tweet['body'] = request.json['body']
     user_tweet['timestamp']=strftime("%Y-%m-%dT%H:%M:%SZ", gmtime())
     user_tweet['id'] = random.randint(1,1000)

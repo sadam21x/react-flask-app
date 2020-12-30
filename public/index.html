@@ -7,14 +7,20 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
     <nav class="indigo darken-4">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="/index" class="brand-logo">App</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <a href="/" class="brand-logo">App</a>
+                <a href="#" data-target="mobile-navbar" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="/adduser">Add User</a></li>
+                    <li><a href="/addtweets">Add Tweets</a></li>
+                    <li><a href="https://github.com/sadam21x/react-flask-app" target="_blank">GitHub</a></li>
                     <li><a href="/profile">Profile</a></li>
                     <li><a href="/logout">Logout</a></li>
-                    <li><a href="#" class="yellow-text" style="pointer-events: none;">Hi, {{ session['logged_in'] }}!</a></li>
+                    <li><a href="#" class="yellow-text" style="pointer-events: none;">Hi, {{ session['username'] }}!</a></li>
                 </ul>
             </div>
         </div>

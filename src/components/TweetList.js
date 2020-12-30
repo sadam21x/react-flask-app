@@ -3,7 +3,7 @@ import TweetTemplate from './TweetTemplate'
 
 export class TweetList extends Component {
     render() {
-        let tweetlist = this.props.tweets.map(tweet => <TweetTemplate key={tweet.id} {...tweet} />);           
+        let tweetlist = this.props.tweet.map(tweet => <TweetTemplate key={tweet.id} {...tweet} />);           
         
         return (
             <div>
