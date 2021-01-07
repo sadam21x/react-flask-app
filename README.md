@@ -1,4 +1,4 @@
-# 🚀 React App with Flask API 🚀
+# 🚀 Flask Tweet App 🚀
 
 ## Nama : Sadam
 ## NIM : 151811513004 <br><br>
@@ -15,13 +15,13 @@
 ```shell
 # Clone this repository
 
-git clone https://github.com/sadam21x/react-flask-app.git
+git clone https://github.com/sadam21x/flask-tweet-app.git
 ```
 
 ```shell
 # Move into app directory
 
-cd react-flask-app
+cd flask-tweet-app
 ```
 
 ```shell

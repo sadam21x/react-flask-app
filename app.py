@@ -12,7 +12,8 @@ from api.api_v1 import home_index, list_users, list_user, add_user, del_user, up
 from api.api_v2 import list_tweets, list_tweet, add_tweet
 
 # connection to MongoDB Database
-connection_url = 'mongodb://localhost:27017'
+# connection_url = 'mongodb://localhost:27017'
+connection_url = 'mongodb://admin:bulldog99@cloud-computing-shard-00-00.i77a5.mongodb.net:27017,cloud-computing-shard-00-01.i77a5.mongodb.net:27017,cloud-computing-shard-00-02.i77a5.mongodb.net:27017/test?ssl=true&replicaSet=atlas-11dc32-shard-0&authSource=admin&retryWrites=true&w=majority'
 connection = MongoClient(connection_url)
 
 app = Flask(__name__, template_folder='public', static_folder='public/static')
@@ -70,7 +71,8 @@ def root():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
-        return render_template('index.html')
+        data = list_tweets()
+        return render_template('index.html', data=data)
 
 @app.route('/login', methods=['POST'])
 def do_admin_login():
