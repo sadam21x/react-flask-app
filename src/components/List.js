@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import './List.css'
 
 export class List extends Component {
     constructor(props){
         super(props);
-    this.state = {
-            tweets: []
+        this.state = {
+            data: []
         };
         this.getTweetsData = this.getTweetsData.bind(this);
     }
@@ -16,9 +17,9 @@ export class List extends Component {
             })
             .then(data => {
                 this.setState({
-                    tweets: Object.values(data)
+                    // tweets: Object.values(data)
+                    data: data['tweets_list']
                 });
-                console.log(this.state.tweets);
             })
             .catch(error => console.log(error))
     }
@@ -28,32 +29,28 @@ export class List extends Component {
     }
 
     render() {
-        var tweets = this.state.tweets;
-        // var tweets_item = tweets.map((tweets) => <li key={tweets._id}>{tweets.body}</li>)
+        var tweets = this.state.data;
+        var myObject = this.state.data;
 
         return (
-            <div>
+            <div className="__List__">
                 <ul className="collection">
                         <li className="collection-item avatar">
                             <i className="material-icons circle red">insert_comment</i>
                             <span className="title">Sadam</span>
                             <p>Hello world</p>
-                            <p>1999</p>
+                            <p>2020-12-26T13:44:47Z</p>
                         </li>
-                        {/* {tweets.map(([id, tweetedby, body, ...timestamp]) => {
-                            return(
+                        {/* {tweets.map((data => 
+                            <li>{data}</li>
+                        ))} */}
+
+                        {Object.keys(myObject).map(function(key) {
+                            return (
                                 <li>
-                                    <p>{ body }</p>
-                                    <p>{ body }</p>
-                                    <p>{ body }</p>
-                                    <p>{ body }</p>
-                                    <p>{ body }</p>
-                                    <p>{ body }</p>
+                                    Key: {key}, Value: {myObject[key]}
                                 </li>
-                            )
-                        })} */}
-                        {tweets.map(item => {
-                            return <li>{item}</li>
+                            );
                         })}
                 </ul>
             </div>

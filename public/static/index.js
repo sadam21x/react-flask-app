@@ -1,26 +1,24 @@
 $('.sidenav').sidenav();
 
-var tweets = [];
+// var tweets;
 
 // get_tweets();
-// render_tweets(tweets);
+// render_tweets();
 
-function get_tweets(){
-    $.ajax({
-        type: 'GET',
-        url: '/api/v2/tweets',
-        dataType: 'json',
-        success: function(data){
-            // tweets = Object.values(data);
-            tweets = data;
-            console.log(tweets);
-        }
-    });
-}
+// function get_tweets(){
+//     $.ajax({
+//         type: 'GET',
+//         url: '/api/v2/tweets',
+//         dataType: 'json',
+//         success: function(data){
+//             // tweets = data['tweets_list'];
+//             tweets = data;
+//         }
+//     });
+// }
 
-function render_tweets(tweets){
-    for (let index = 0; index < tweets.length; index++) {
-        let elem = '<li>'+ tweets[i].body + '</li>';
-        $('#tweetlist').append(elem);
-    }
-}
+// function render_tweets(){
+//     for(let i = 0; i < tweets.length; i++){
+//         console.log(tweets[i].body);
+//     }
+// }

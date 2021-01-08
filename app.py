@@ -72,7 +72,7 @@ def root():
         return render_template('login.html')
     else:
         data = list_tweets()
-        return render_template('index.html', data=data)
+        return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
 def do_admin_login():
@@ -278,4 +278,4 @@ def invalid_request(error):
 
 if __name__ == '__main__':
     create_mongodatabase()
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
